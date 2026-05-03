@@ -20,7 +20,9 @@ themeToggle.addEventListener('change', (e) => {
 });
 // ------------------------------------------
 
+// --- ESTRUCTURA DEL ÁLBUM CORREGIDA ---
 const albumData = [
+    {"name": "Especiales", "teams": [{"name": "Logo Panini", "stickers": 1}, {"name": "Emblemas", "stickers": 4}, {"name": "Ciudades", "stickers": 4}, {"name": "Coca Cola", "stickers": 14}]},
     {"name": "Grupo A", "teams": [{"name": "México", "stickers": 20}, {"name": "Sudáfrica", "stickers": 20}, {"name": "Corea del Sur", "stickers": 20}, {"name": "República Checa", "stickers": 20}]},
     {"name": "Grupo B", "teams": [{"name": "Canadá", "stickers": 20}, {"name": "Suiza", "stickers": 20}, {"name": "Catar", "stickers": 20}, {"name": "Bosnia y Herzegovina", "stickers": 20}]},
     {"name": "Grupo C", "teams": [{"name": "Brasil", "stickers": 20}, {"name": "Marruecos", "stickers": 20}, {"name": "Haití", "stickers": 20}, {"name": "Escocia", "stickers": 20}]},
@@ -31,7 +33,7 @@ const albumData = [
     {"name": "Grupo H", "teams": [{"name": "España", "stickers": 20}, {"name": "Cabo Verde", "stickers": 20}, {"name": "Arabia Saudita", "stickers": 20}, {"name": "Uruguay", "stickers": 20}]},
     {"name": "Grupo I", "teams": [{"name": "Francia", "stickers": 20}, {"name": "Senegal", "stickers": 20}, {"name": "Noruega", "stickers": 20}, {"name": "Irak", "stickers": 20}]},
     {"name": "Grupo J", "teams": [{"name": "Argentina", "stickers": 20}, {"name": "Argelia", "stickers": 20}, {"name": "Austria", "stickers": 20}, {"name": "Jordania", "stickers": 20}]},
-    {"name": "Grupo K", "teams": [{"name": "Portugal", "stickers": 20}, {"name": "Uzbekistán", "stickers": 20}, {"name": "Colombia", "stickers": 20}, {"name": "R.D. Congo", "stickers": 20}, {"name": "Logo Panini", "stickers": 1}, {"name": "Emblemas", "stickers": 4}, {"name": "Ciudades", "stickers": 4}, {"name": "Coca Cola", "stickers": 14}]},
+    {"name": "Grupo K", "teams": [{"name": "Portugal", "stickers": 20}, {"name": "Uzbekistán", "stickers": 20}, {"name": "Colombia", "stickers": 20}, {"name": "R.D. Congo", "stickers": 20}]},
     {"name": "Grupo L", "teams": [{"name": "Inglaterra", "stickers": 20}, {"name": "Croacia", "stickers": 20}, {"name": "Ghana", "stickers": 20}, {"name": "Panamá", "stickers": 20}]}
 ];
 
@@ -62,9 +64,21 @@ function init() {
         const groupWrapper = card.querySelector(`#gwrap-${gIndex}`);
         const groupContent = card.querySelector(`#gcontent-${gIndex}`);
         
+        // --- LÓGICA DE CIERRE EN CASCADA ---
         groupHeader.onclick = () => {
+            const isClosing = groupHeader.classList.contains('open');
+            
             groupWrapper.classList.toggle('active');
             groupHeader.classList.toggle('open');
+
+            // Si estamos cerrando el grupo, cerramos todos los países internos
+            if (isClosing) {
+                const openTeamHeaders = groupContent.querySelectorAll('.team-header.open');
+                const activeTeamWrappers = groupContent.querySelectorAll('.accordion-wrapper.active');
+                
+                openTeamHeaders.forEach(th => th.classList.remove('open'));
+                activeTeamWrappers.forEach(tw => tw.classList.remove('active'));
+            }
         };
 
         group.teams.forEach((team, tIndex) => {

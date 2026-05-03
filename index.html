@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panini FIFA WC26 Album</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Agregamos FontAwesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="./resources/FIFA-2026-World-Cup-Logo-75.png">
 </head>
 <body class="mode-pegadas">
 
   <header>
-    <!-- Switch Modo Oscuro Estilo iOS (Derecha) -->
-    <label class="theme-switch" for="checkbox">
-      <input type="checkbox" id="checkbox" />
-      <div class="slider round"></div>
-    </label>
+    <!-- Contenedor del Switch con Iconos FontAwesome -->
+    <div class="theme-switch-wrapper">
+      <i class="fa-solid fa-sun theme-icon" id="icon-light"></i>
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+      </label>
+      <i class="fa-solid fa-moon theme-icon" id="icon-dark"></i>
+    </div>
 
-    <!-- Nuevo Logo (Izquierda) -->
+    <!-- Logo (Izquierda) -->
     <div class="header-img">
         <img src="./resources/FIFA-2026-World-Cup-Logo-75.png" alt="Logo Panini FIFA WC26" id="logo-img" onerror="this.style.display='none'">
     </div>
     
-    <!-- Título Centrado -->
     <div class="header-top">
       <h1>Panini WC26</h1>
     </div>
-
-    <!-- Menú -->
     <div class="tabs">
       <div class="tab active" data-mode="pegadas">Pegadas</div>
       <div class="tab" data-mode="repetidas">Repetidas</div>

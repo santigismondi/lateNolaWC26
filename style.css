@@ -93,11 +93,48 @@ header {
   transition: background-color 0.3s;
 }
 
-/* --- SWITCH MODO OSCURO (ESTILO iOS) --- */
-.theme-switch {
+/* --- SWITCH MODO OSCURO (ESTILO iOS CON ICONOS) --- */
+.theme-switch-wrapper {
   position: absolute;
-  top: 25px;
+  top: 22px;
   right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Un poquito más de espacio para que respiren los iconos */
+}
+
+.theme-icon {
+  font-size: 1.1rem;
+  transition: opacity 0.3s ease, color 0.3s ease, filter 0.3s ease;
+  user-select: none;
+}
+
+/* --- Lógica de colores e iluminación de los iconos de FontAwesome --- */
+
+/* Cuando está en Modo Oscuro */
+html[data-theme="dark"] #icon-dark { 
+  opacity: 1; 
+  color: #ffffff; /* Luna blanca */
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); 
+}
+html[data-theme="dark"] #icon-light { 
+  opacity: 0.3; 
+  color: #94a3b8; /* Sol apagado */
+}
+
+/* Cuando está en Modo Claro (Por defecto) */
+html:not([data-theme="dark"]) #icon-light { 
+  opacity: 1; 
+  color: var(--panini-yellow); /* Sol amarillo Panini */
+  filter: drop-shadow(0 0 4px rgba(211, 217, 59, 0.8)); 
+}
+html:not([data-theme="dark"]) #icon-dark { 
+  opacity: 0.3; 
+  color: #94a3b8; /* Luna apagada */
+}
+
+.theme-switch {
+  position: relative;
   display: inline-block;
   width: 50px;
   height: 28px;
@@ -116,7 +153,7 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc; /* Color cuando está apagado (claro) */
+  background-color: #94a3b8;
   transition: .4s;
 }
 
@@ -133,7 +170,7 @@ header {
 }
 
 input:checked + .slider {
-  background-color: var(--panini-green); /* Color cuando está encendido (oscuro) */
+  background-color: var(--panini-green);
 }
 
 input:checked + .slider:before {
