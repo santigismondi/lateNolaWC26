@@ -242,3 +242,11 @@ input:checked + .slider:before {
 .progress-bar { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.5s ease-out; }
 
 .hidden { display: none !important; }
+
+/* --- RESPONSIVE / MOBILE --- */
+/* Si la pantalla tiene 600px de ancho o menos (celulares), se oculta el logo */
+@media (max-width: 600px) {
+  .header-img {
+    display: none;
+  }
+}
