@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panini FIFA WC26 Album</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-pegadas">
+
+  <header>
+    <!-- Switch Modo Oscuro Estilo iOS (Derecha) -->
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+
+    <!-- Nuevo Logo (Izquierda) -->
+    <div class="header-img">
+        <img src="./resources/FIFA-2026-World-Cup-Logo-75.png" alt="Logo Panini FIFA WC26" id="logo-img" onerror="this.style.display='none'">
+    </div>
+    
+    <!-- Título Centrado -->
+    <div class="header-top">
+      <h1>Panini WC26</h1>
+    </div>
+
+    <!-- Menú -->
+    <div class="tabs">
+      <div class="tab active" data-mode="pegadas">Pegadas</div>
+      <div class="tab" data-mode="repetidas">Repetidas</div>
+    </div>
+  </header>
+
+  <main class="container" id="app-container">
+    <!-- Se inyecta el contenido con script.js -->
+  </main>
+
+  <!-- Footer Pegadas -->
+  <footer class="footer-stats" id="footer-pegadas">
+    <div class="stats-text">
+      <span id="text-pegadas">Pegadas: 0 / 0</span>
+      <span id="text-faltan">Faltan: 0</span>
+      <span id="text-porcentaje">0%</span>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+  </footer>
+
+  <!-- Footer Repetidas -->
+  <footer class="footer-stats hidden" id="footer-repetidas">
+    <div class="stats-text" style="justify-content: center; font-size: 1.1rem; color: var(--panini-orange);">
+      <span id="text-total-repetidas">Total Repetidas: 0</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
