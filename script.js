@@ -22,7 +22,7 @@ themeToggle.addEventListener('change', (e) => {
 
 // --- ESTRUCTURA DEL ÁLBUM CORREGIDA ---
 const albumData = [
-    { "name": "Especiales", "teams": [{ "name": "Logo Panini", "stickers": 1 }, { "name": "Emblemas", "stickers": 4 }, { "name": "Ciudades", "stickers": 4 }, { "name": "Coca Cola", "stickers": 14 }] },
+    { "name": "Especiales", "teams": [{ "name": "Logo Panini", "stickers": 1 }, { "name": "Emblemas y Campeones", "stickers": 19 }, { "name": "Ciudades", "stickers": 4 }, { "name": "Coca Cola", "stickers": 14 }] },
     { "name": "Grupo A", "teams": [{ "name": "México", "stickers": 20 }, { "name": "Sudáfrica", "stickers": 20 }, { "name": "Corea del Sur", "stickers": 20 }, { "name": "República Checa", "stickers": 20 }] },
     { "name": "Grupo B", "teams": [{ "name": "Canadá", "stickers": 20 }, { "name": "Suiza", "stickers": 20 }, { "name": "Catar", "stickers": 20 }, { "name": "Bosnia y Herzegovina", "stickers": 20 }] },
     { "name": "Grupo C", "teams": [{ "name": "Brasil", "stickers": 20 }, { "name": "Marruecos", "stickers": 20 }, { "name": "Haití", "stickers": 20 }, { "name": "Escocia", "stickers": 20 }] },
@@ -206,7 +206,7 @@ document.getElementById('btn-export-repetidas').addEventListener('click', async 
     });
 
     // 2. Construir el texto ordenado
-    let textoExportacion = "MIS REPETIDAS - PANINI WC 2026\n";
+    let textoExportacion = "Repetidas:\n";
     textoExportacion += "================================\n\n";
 
     // Obtener los países alfabéticamente
