@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="./resources/FIFA-2026-World-Cup-Logo-75.png">
 </head>
+
 <body class="mode-pegadas">
 
   <header>
@@ -24,9 +26,10 @@
 
     <!-- Logo (Izquierda) -->
     <div class="header-img">
-        <img src="./resources/FIFA-2026-World-Cup-Logo-75.png" alt="Logo Panini FIFA WC26" id="logo-img" onerror="this.style.display='none'">
+      <img src="./resources/FIFA-2026-World-Cup-Logo-75.png" alt="Logo Panini FIFA WC26" id="logo-img"
+        onerror="this.style.display='none'">
     </div>
-    
+
     <div class="header-top">
       <h1>Panini WC26</h1>
     </div>
@@ -54,11 +57,16 @@
 
   <!-- Footer Repetidas -->
   <footer class="footer-stats hidden" id="footer-repetidas">
-    <div class="stats-text" style="justify-content: center; font-size: 1.1rem; color: var(--panini-orange);">
-      <span id="text-total-repetidas">Total Repetidas: 0</span>
+    <div class="stats-text" style="align-items: center;">
+      <span id="text-total-repetidas" style="color: var(--panini-orange);">Total Repetidas: 0</span>
+      <!-- Botón de Copiar -->
+      <button id="btn-export-repetidas" class="export-btn" aria-label="Copiar Repetidas">
+        <i class="fa-solid fa-copy"></i> Copiar
+      </button>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
+
 </html>

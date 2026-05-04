@@ -12,27 +12,27 @@
   /* --- MODO CLARO (Por defecto) --- */
   --bg-color: #f4f6f9;
   --text-color: #2c3e50;
-  
+
   --header-bg: var(--panini-blue);
   --tabs-bg: rgba(255, 255, 255, 0.15);
   --tabs-text: rgba(255, 255, 255, 0.8);
-  
+
   --group-header-bg: var(--panini-blue);
-  
+
   --card-bg: #ffffff;
   --card-border: #e1e4e8;
-  
+
   --team-bg: #ffffff;
   --team-hover: #f8fafc;
   --team-border: #f0f2f5;
   --team-name-color: var(--panini-blue);
   --stats-muted: #777777;
-  
+
   --sticker-bg: #ffffff;
   --sticker-border: #d1d5db;
   --sticker-text: #555555;
   --sticker-hover-color: var(--panini-blue);
-  
+
   --footer-bg: #ffffff;
   --footer-border: var(--panini-blue);
   --stats-text-color: var(--panini-blue);
@@ -42,27 +42,27 @@
 [data-theme="dark"] {
   --bg-color: #0d1323;
   --text-color: #e2e8f0;
-  
+
   --header-bg: #151c2f;
   --tabs-bg: rgba(0, 0, 0, 0.25);
   --tabs-text: #94a3b8;
-  
+
   --group-header-bg: #1a2238;
-  
+
   --card-bg: #151c2f;
   --card-border: #232d4b;
-  
+
   --team-bg: #151c2f;
   --team-hover: #1e2842;
   --team-border: #232d4b;
   --team-name-color: #e2e8f0;
   --stats-muted: #94a3b8;
-  
+
   --sticker-bg: #0d1323;
   --sticker-border: #2c3a80;
   --sticker-text: #cbd5e1;
   --sticker-hover-color: var(--panini-yellow);
-  
+
   --footer-bg: #151c2f;
   --footer-border: var(--panini-yellow);
   --stats-text-color: #e2e8f0;
@@ -100,7 +100,8 @@ header {
   right: 15px;
   display: flex;
   align-items: center;
-  gap: 8px; /* Un poquito más de espacio para que respiren los iconos */
+  gap: 8px;
+  /* Un poquito más de espacio para que respiren los iconos */
 }
 
 .theme-icon {
@@ -112,25 +113,31 @@ header {
 /* --- Lógica de colores e iluminación de los iconos de FontAwesome --- */
 
 /* Cuando está en Modo Oscuro */
-html[data-theme="dark"] #icon-dark { 
-  opacity: 1; 
-  color: #ffffff; /* Luna blanca */
-  filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); 
+html[data-theme="dark"] #icon-dark {
+  opacity: 1;
+  color: #ffffff;
+  /* Luna blanca */
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
 }
-html[data-theme="dark"] #icon-light { 
-  opacity: 0.3; 
-  color: #94a3b8; /* Sol apagado */
+
+html[data-theme="dark"] #icon-light {
+  opacity: 0.3;
+  color: #94a3b8;
+  /* Sol apagado */
 }
 
 /* Cuando está en Modo Claro (Por defecto) */
-html:not([data-theme="dark"]) #icon-light { 
-  opacity: 1; 
-  color: var(--panini-yellow); /* Sol amarillo Panini */
-  filter: drop-shadow(0 0 4px rgba(211, 217, 59, 0.8)); 
+html:not([data-theme="dark"]) #icon-light {
+  opacity: 1;
+  color: var(--panini-yellow);
+  /* Sol amarillo Panini */
+  filter: drop-shadow(0 0 4px rgba(211, 217, 59, 0.8));
 }
-html:not([data-theme="dark"]) #icon-dark { 
-  opacity: 0.3; 
-  color: #94a3b8; /* Luna apagada */
+
+html:not([data-theme="dark"]) #icon-dark {
+  opacity: 0.3;
+  color: #94a3b8;
+  /* Luna apagada */
 }
 
 .theme-switch {
@@ -140,7 +147,7 @@ html:not([data-theme="dark"]) #icon-dark {
   height: 28px;
 }
 
-.theme-switch input { 
+.theme-switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -166,14 +173,14 @@ html:not([data-theme="dark"]) #icon-dark {
   bottom: 4px;
   background-color: white;
   transition: .4s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--panini-green);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(22px);
 }
 
@@ -184,6 +191,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 /* --------------------------------------- */
 /* --- LOGO ESQUINA SUPERIOR IZQUIERDA --- */
 .header-img {
@@ -195,41 +203,104 @@ input:checked + .slider:before {
 }
 
 .header-img img {
-  height: 70px; /* Puedes ajustar este tamaño a tu gusto */
+  height: 70px;
+  /* Puedes ajustar este tamaño a tu gusto */
   width: auto;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.95); /* Fondo blanco sutil */
+  background: rgba(255, 255, 255, 0.95);
+  /* Fondo blanco sutil */
   padding: 4px 6px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease;
 }
 
 .header-img img:hover {
-  transform: scale(1.05); /* Pequeño efecto al tocar/pasar el mouse */
+  transform: scale(1.05);
+  /* Pequeño efecto al tocar/pasar el mouse */
 }
-.header-top { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-.header-top img { height: 50px; object-fit: contain; background: white; padding: 3px; border-radius: 8px; }
-.header-top h1 { margin: 0; font-size: 1.3rem; text-transform: uppercase; color: white; letter-spacing: 1px; }
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.header-top img {
+  height: 50px;
+  object-fit: contain;
+  background: white;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.header-top h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 1px;
+}
 
 /* Tabs */
-.tabs { display: flex; width: 100%; max-width: 400px; border-radius: 8px; overflow: hidden; background: var(--tabs-bg); box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); transition: background 0.3s; }
-.tab { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-weight: bold; color: var(--tabs-text); transition: all 0.3s ease; }
-.tab.active[data-mode="pegadas"] { background: var(--primary-color); color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-.tab.active[data-mode="repetidas"] { background: var(--secondary-color); color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.tabs {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--tabs-bg);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s;
+}
 
-.container { max-width: 800px; margin: 20px auto; padding: 0 10px; }
+.tab {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--tabs-text);
+  transition: all 0.3s ease;
+}
+
+.tab.active[data-mode="pegadas"] {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tab.active[data-mode="repetidas"] {
+  background: var(--secondary-color);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
 
 /* Tarjetas */
-.group-card { background: var(--card-bg); border-radius: 8px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid var(--card-border); transition: background 0.3s, border 0.3s; }
+.group-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--card-border);
+  transition: background 0.3s, border 0.3s;
+}
 
-.group-header { 
-  background: var(--group-header-bg); 
-  color: white; 
-  padding: 12px 15px; 
-  font-weight: 800; 
-  text-transform: uppercase; 
-  letter-spacing: 0.5px; 
+.group-header {
+  background: var(--group-header-bg);
+  color: white;
+  padding: 12px 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   border-left: 6px solid var(--panini-red);
   display: flex;
   justify-content: space-between;
@@ -238,47 +309,199 @@ input:checked + .slider:before {
   transition: background 0.3s;
 }
 
-.group-header .chevron::after { color: white; }
-.group-header.open .chevron::after { transform: rotate(180deg); }
-
-.accordion-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
-.accordion-wrapper.active { grid-template-rows: 1fr; }
-.accordion-inner { overflow: hidden; }
-
-/* Países */
-.team-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--team-bg); border-bottom: 1px solid var(--team-border); transition: background 0.2s, border 0.3s; }
-.team-header:hover { background: var(--team-hover); }
-.team-name { font-weight: 700; font-size: 1.1rem; color: var(--team-name-color); transition: color 0.3s; }
-.team-stats { font-size: 0.85rem; color: var(--stats-muted); font-weight: 600; transition: color 0.3s;}
-
-.chevron::after { content: '▼'; font-size: 0.7rem; color: var(--team-name-color); transition: transform 0.3s, color 0.3s; display: inline-block;}
-.team-header.open .chevron::after { transform: rotate(180deg); }
-
-/* Figuritas */
-.stickers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 8px; padding: 15px; background: var(--card-bg); transition: background 0.3s; }
-
-.sticker { 
-  display: flex; align-items: center; justify-content: center; height: 45px; 
-  border: 2px solid var(--sticker-border); border-radius: 6px; font-weight: bold; cursor: pointer; 
-  background: var(--sticker-bg); color: var(--sticker-text); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
+.group-header .chevron::after {
+  color: white;
 }
 
-.sticker:hover { transform: scale(1.05); border-color: var(--sticker-hover-color); color: var(--sticker-hover-color); }
+.group-header.open .chevron::after {
+  transform: rotate(180deg);
+}
 
-.mode-pegadas .sticker.pegada { background: var(--primary-color); color: white; border-color: var(--primary-color); box-shadow: 0 2px 5px rgba(122, 191, 90, 0.4); }
-.mode-repetidas .sticker.repetida { background: var(--secondary-color); color: white; border-color: var(--secondary-color); box-shadow: 0 2px 5px rgba(242, 93, 7, 0.4); }
+.accordion-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-wrapper.active {
+  grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+/* Países */
+.team-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: var(--team-bg);
+  border-bottom: 1px solid var(--team-border);
+  transition: background 0.2s, border 0.3s;
+}
+
+.team-header:hover {
+  background: var(--team-hover);
+}
+
+.team-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--team-name-color);
+  transition: color 0.3s;
+}
+
+.team-stats {
+  font-size: 0.85rem;
+  color: var(--stats-muted);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.chevron::after {
+  content: '▼';
+  font-size: 0.7rem;
+  color: var(--team-name-color);
+  transition: transform 0.3s, color 0.3s;
+  display: inline-block;
+}
+
+.team-header.open .chevron::after {
+  transform: rotate(180deg);
+}
+
+/* Figuritas */
+.stickers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+  gap: 8px;
+  padding: 15px;
+  background: var(--card-bg);
+  transition: background 0.3s;
+}
+
+.sticker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  border: 2px solid var(--sticker-border);
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--sticker-bg);
+  color: var(--sticker-text);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sticker:hover {
+  transform: scale(1.05);
+  border-color: var(--sticker-hover-color);
+  color: var(--sticker-hover-color);
+}
+
+.mode-pegadas .sticker.pegada {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(122, 191, 90, 0.4);
+}
+
+.mode-repetidas .sticker.repetida {
+  background: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+  box-shadow: 0 2px 5px rgba(242, 93, 7, 0.4);
+}
 
 /* Footer */
-.footer-stats { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--footer-bg); padding: 15px; box-sizing: border-box; box-shadow: 0 -4px 15px rgba(0,0,0,0.15); border-top: 3px solid var(--footer-border); z-index: 100; transition: background 0.3s, border 0.3s;}
-.stats-text { display: flex; justify-content: space-between; width: 100%; max-width: 800px; margin: 0 auto 10px; font-weight: 700; color: var(--stats-text-color); transition: color 0.3s; }
+.footer-stats {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--footer-bg);
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+  border-top: 3px solid var(--footer-border);
+  z-index: 100;
+  transition: background 0.3s, border 0.3s;
+}
 
-#text-faltan { color: var(--panini-red); }
-#text-total-repetidas { color: var(--panini-orange); width: 100%; text-align: center; font-size: 1.1rem;}
+.stats-text {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 10px;
+  font-weight: 700;
+  color: var(--stats-text-color);
+  transition: color 0.3s;
+}
 
-.progress-bar-container { width: 100%; max-width: 800px; height: 12px; background: #334155; border-radius: 6px; margin: 0 auto; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); }
-.progress-bar { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.5s ease-out; }
+#text-faltan {
+  color: var(--panini-red);
+}
 
-.hidden { display: none !important; }
+#text-total-repetidas {
+  color: var(--panini-orange);
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  max-width: 800px;
+  height: 12px;
+  background: #334155;
+  border-radius: 6px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--primary-color);
+  width: 0%;
+  transition: width 0.5s ease-out;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --- BOTÓN EXPORTAR REPETIDAS --- */
+.export-btn {
+  background-color: var(--panini-orange);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(242, 93, 7, 0.3);
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  background-color: #d14d04;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(242, 93, 7, 0.4);
+}
+
+.export-btn:active {
+  transform: translateY(0);
+}
 
 /* --- RESPONSIVE / MOBILE --- */
 /* Si la pantalla tiene 600px de ancho o menos (celulares), se oculta el logo */

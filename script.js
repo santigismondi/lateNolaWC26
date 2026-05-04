@@ -22,19 +22,19 @@ themeToggle.addEventListener('change', (e) => {
 
 // --- ESTRUCTURA DEL ÁLBUM CORREGIDA ---
 const albumData = [
-    {"name": "Especiales", "teams": [{"name": "Logo Panini", "stickers": 1}, {"name": "Emblemas", "stickers": 4}, {"name": "Ciudades", "stickers": 4}, {"name": "Coca Cola", "stickers": 14}]},
-    {"name": "Grupo A", "teams": [{"name": "México", "stickers": 20}, {"name": "Sudáfrica", "stickers": 20}, {"name": "Corea del Sur", "stickers": 20}, {"name": "República Checa", "stickers": 20}]},
-    {"name": "Grupo B", "teams": [{"name": "Canadá", "stickers": 20}, {"name": "Suiza", "stickers": 20}, {"name": "Catar", "stickers": 20}, {"name": "Bosnia y Herzegovina", "stickers": 20}]},
-    {"name": "Grupo C", "teams": [{"name": "Brasil", "stickers": 20}, {"name": "Marruecos", "stickers": 20}, {"name": "Haití", "stickers": 20}, {"name": "Escocia", "stickers": 20}]},
-    {"name": "Grupo D", "teams": [{"name": "Estados Unidos", "stickers": 20}, {"name": "Paraguay", "stickers": 20}, {"name": "Australia", "stickers": 20}, {"name": "Turquía", "stickers": 20}]},
-    {"name": "Grupo E", "teams": [{"name": "Alemania", "stickers": 20}, {"name": "Curazao", "stickers": 20}, {"name": "Costa de Marfil", "stickers": 20}, {"name": "Ecuador", "stickers": 20}]},
-    {"name": "Grupo F", "teams": [{"name": "Países Bajos", "stickers": 20}, {"name": "Japón", "stickers": 20}, {"name": "Túnez", "stickers": 20}, {"name": "Suecia", "stickers": 20}]},
-    {"name": "Grupo G", "teams": [{"name": "Bélgica", "stickers": 20}, {"name": "Egipto", "stickers": 20}, {"name": "Irán", "stickers": 20}, {"name": "Nueva Zelanda", "stickers": 20}]},
-    {"name": "Grupo H", "teams": [{"name": "España", "stickers": 20}, {"name": "Cabo Verde", "stickers": 20}, {"name": "Arabia Saudita", "stickers": 20}, {"name": "Uruguay", "stickers": 20}]},
-    {"name": "Grupo I", "teams": [{"name": "Francia", "stickers": 20}, {"name": "Senegal", "stickers": 20}, {"name": "Noruega", "stickers": 20}, {"name": "Irak", "stickers": 20}]},
-    {"name": "Grupo J", "teams": [{"name": "Argentina", "stickers": 20}, {"name": "Argelia", "stickers": 20}, {"name": "Austria", "stickers": 20}, {"name": "Jordania", "stickers": 20}]},
-    {"name": "Grupo K", "teams": [{"name": "Portugal", "stickers": 20}, {"name": "Uzbekistán", "stickers": 20}, {"name": "Colombia", "stickers": 20}, {"name": "R.D. Congo", "stickers": 20}]},
-    {"name": "Grupo L", "teams": [{"name": "Inglaterra", "stickers": 20}, {"name": "Croacia", "stickers": 20}, {"name": "Ghana", "stickers": 20}, {"name": "Panamá", "stickers": 20}]}
+    { "name": "Especiales", "teams": [{ "name": "Logo Panini", "stickers": 1 }, { "name": "Emblemas", "stickers": 4 }, { "name": "Ciudades", "stickers": 4 }, { "name": "Coca Cola", "stickers": 14 }] },
+    { "name": "Grupo A", "teams": [{ "name": "México", "stickers": 20 }, { "name": "Sudáfrica", "stickers": 20 }, { "name": "Corea del Sur", "stickers": 20 }, { "name": "República Checa", "stickers": 20 }] },
+    { "name": "Grupo B", "teams": [{ "name": "Canadá", "stickers": 20 }, { "name": "Suiza", "stickers": 20 }, { "name": "Catar", "stickers": 20 }, { "name": "Bosnia y Herzegovina", "stickers": 20 }] },
+    { "name": "Grupo C", "teams": [{ "name": "Brasil", "stickers": 20 }, { "name": "Marruecos", "stickers": 20 }, { "name": "Haití", "stickers": 20 }, { "name": "Escocia", "stickers": 20 }] },
+    { "name": "Grupo D", "teams": [{ "name": "Estados Unidos", "stickers": 20 }, { "name": "Paraguay", "stickers": 20 }, { "name": "Australia", "stickers": 20 }, { "name": "Turquía", "stickers": 20 }] },
+    { "name": "Grupo E", "teams": [{ "name": "Alemania", "stickers": 20 }, { "name": "Curazao", "stickers": 20 }, { "name": "Costa de Marfil", "stickers": 20 }, { "name": "Ecuador", "stickers": 20 }] },
+    { "name": "Grupo F", "teams": [{ "name": "Países Bajos", "stickers": 20 }, { "name": "Japón", "stickers": 20 }, { "name": "Túnez", "stickers": 20 }, { "name": "Suecia", "stickers": 20 }] },
+    { "name": "Grupo G", "teams": [{ "name": "Bélgica", "stickers": 20 }, { "name": "Egipto", "stickers": 20 }, { "name": "Irán", "stickers": 20 }, { "name": "Nueva Zelanda", "stickers": 20 }] },
+    { "name": "Grupo H", "teams": [{ "name": "España", "stickers": 20 }, { "name": "Cabo Verde", "stickers": 20 }, { "name": "Arabia Saudita", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }] },
+    { "name": "Grupo I", "teams": [{ "name": "Francia", "stickers": 20 }, { "name": "Senegal", "stickers": 20 }, { "name": "Noruega", "stickers": 20 }, { "name": "Irak", "stickers": 20 }] },
+    { "name": "Grupo J", "teams": [{ "name": "Argentina", "stickers": 20 }, { "name": "Argelia", "stickers": 20 }, { "name": "Austria", "stickers": 20 }, { "name": "Jordania", "stickers": 20 }] },
+    { "name": "Grupo K", "teams": [{ "name": "Portugal", "stickers": 20 }, { "name": "Uzbekistán", "stickers": 20 }, { "name": "Colombia", "stickers": 20 }, { "name": "R.D. Congo", "stickers": 20 }] },
+    { "name": "Grupo L", "teams": [{ "name": "Inglaterra", "stickers": 20 }, { "name": "Croacia", "stickers": 20 }, { "name": "Ghana", "stickers": 20 }, { "name": "Panamá", "stickers": 20 }] }
 ];
 
 let mode = 'pegadas';
@@ -45,11 +45,11 @@ albumData.forEach(g => g.teams.forEach(t => totalStickers += t.stickers));
 
 function init() {
     const container = document.getElementById('app-container');
-    
+
     albumData.forEach((group, gIndex) => {
         const card = document.createElement('div');
         card.className = 'group-card';
-        
+
         card.innerHTML = `
             <div class="group-header" id="ghead-${gIndex}">
                 <span>${group.name}</span>
@@ -59,15 +59,15 @@ function init() {
                 <div class="accordion-inner" id="gcontent-${gIndex}"></div>
             </div>
         `;
-        
+
         const groupHeader = card.querySelector(`#ghead-${gIndex}`);
         const groupWrapper = card.querySelector(`#gwrap-${gIndex}`);
         const groupContent = card.querySelector(`#gcontent-${gIndex}`);
-        
+
         // --- LÓGICA DE CIERRE EN CASCADA ---
         groupHeader.onclick = () => {
             const isClosing = groupHeader.classList.contains('open');
-            
+
             groupWrapper.classList.toggle('active');
             groupHeader.classList.toggle('open');
 
@@ -75,17 +75,17 @@ function init() {
             if (isClosing) {
                 const openTeamHeaders = groupContent.querySelectorAll('.team-header.open');
                 const activeTeamWrappers = groupContent.querySelectorAll('.accordion-wrapper.active');
-                
+
                 openTeamHeaders.forEach(th => th.classList.remove('open'));
                 activeTeamWrappers.forEach(tw => tw.classList.remove('active'));
             }
         };
 
         group.teams.forEach((team, tIndex) => {
-            const safeId = `g${gIndex}-t${tIndex}`; 
+            const safeId = `g${gIndex}-t${tIndex}`;
             const item = document.createElement('div');
             item.className = 'team-item';
-            
+
             item.innerHTML = `
                 <div class="team-header" id="head-${safeId}">
                     <div class="team-info">
@@ -100,12 +100,12 @@ function init() {
                     </div>
                 </div>
             `;
-            
+
             const teamHeader = item.querySelector(`#head-${safeId}`);
             const teamWrapper = item.querySelector(`#twrap-${safeId}`);
             const grid = item.querySelector(`#grid-${safeId}`);
-            
-            for(let i=1; i<=team.stickers; i++) {
+
+            for (let i = 1; i <= team.stickers; i++) {
                 const id = `${group.name}|${team.name}|${i}`;
                 const s = document.createElement('div');
                 s.className = `sticker ${pegadas.includes(id) ? 'pegada' : ''} ${repetidas.includes(id) ? 'repetida' : ''}`;
@@ -118,7 +118,7 @@ function init() {
                 teamWrapper.classList.toggle('active');
                 teamHeader.classList.toggle('open');
             };
-            
+
             groupContent.appendChild(item);
         });
         container.appendChild(card);
@@ -127,12 +127,12 @@ function init() {
 }
 
 function toggleSticker(id, el, gName, tName, tTotal) {
-    if(mode === 'pegadas') {
-        if(pegadas.includes(id)) pegadas = pegadas.filter(x => x !== id);
+    if (mode === 'pegadas') {
+        if (pegadas.includes(id)) pegadas = pegadas.filter(x => x !== id);
         else pegadas.push(id);
         el.classList.toggle('pegada');
     } else {
-        if(repetidas.includes(id)) repetidas = repetidas.filter(x => x !== id);
+        if (repetidas.includes(id)) repetidas = repetidas.filter(x => x !== id);
         else repetidas.push(id);
         el.classList.toggle('repetida');
     }
@@ -146,8 +146,8 @@ function refreshUI() {
         const safeId = `g${gIndex}-t${tIndex}`;
         const prefix = `${g.name}|${t.name}|`;
         const statEl = document.getElementById(`stat-${safeId}`);
-        
-        if(mode === 'pegadas') {
+
+        if (mode === 'pegadas') {
             const count = pegadas.filter(id => id.startsWith(prefix)).length;
             statEl.innerText = `${count} de ${t.stickers} pegadas`;
             statEl.style.color = count === t.stickers ? 'var(--primary-color)' : 'var(--stats-muted)';
@@ -180,3 +180,63 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 init();
+
+// --- FUNCIONALIDAD: COPIAR REPETIDAS AL PORTAPAPELES ---
+document.getElementById('btn-export-repetidas').addEventListener('click', async (e) => {
+    if (repetidas.length === 0) {
+        alert("Aún no tienes figuritas repetidas marcadas.");
+        return;
+    }
+
+    // 1. Agrupar las figuritas por país
+    const repetidasPorPais = {};
+
+    repetidas.forEach(id => {
+        // El id tiene formato "Grupo|País|Número"
+        const partes = id.split('|');
+        if (partes.length === 3) {
+            const pais = partes[1];
+            const numero = parseInt(partes[2]);
+
+            if (!repetidasPorPais[pais]) {
+                repetidasPorPais[pais] = [];
+            }
+            repetidasPorPais[pais].push(numero);
+        }
+    });
+
+    // 2. Construir el texto ordenado
+    let textoExportacion = "MIS REPETIDAS - PANINI WC 2026\n";
+    textoExportacion += "================================\n\n";
+
+    // Obtener los países alfabéticamente
+    const paisesOrdenados = Object.keys(repetidasPorPais).sort();
+
+    paisesOrdenados.forEach(pais => {
+        // Ordenar los números de menor a mayor
+        const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);
+        textoExportacion += `${pais}: ${numerosOrdenados.join(' - ')}\n`;
+    });
+
+    // 3. Copiar al portapapeles con feedback visual
+    try {
+        await navigator.clipboard.writeText(textoExportacion);
+
+        // Cambiamos el botón para dar feedback al usuario
+        const btn = e.currentTarget;
+        const originalHTML = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
+        btn.style.backgroundColor = 'var(--panini-green)'; // Se pone verde
+
+        // Volvemos a la normalidad después de 2 segundos
+        setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.backgroundColor = ''; // Vuelve al color definido en CSS
+        }, 2000);
+
+    } catch (err) {
+        console.error('Error al copiar: ', err);
+        alert("Hubo un error al intentar copiar. Es posible que tu navegador no tenga los permisos necesarios.");
+    }
+});
