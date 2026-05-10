@@ -2,13 +2,11 @@
 const themeToggle = document.getElementById('checkbox');
 const currentTheme = localStorage.getItem('panini26_theme') || 'light';
 
-// Inicializar el switch según la preferencia guardada
 if (currentTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
     themeToggle.checked = true;
 }
 
-// Escuchar cambios en el switch
 themeToggle.addEventListener('change', (e) => {
     if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark');
@@ -18,23 +16,114 @@ themeToggle.addEventListener('change', (e) => {
         localStorage.setItem('panini26_theme', 'light');
     }
 });
-// ------------------------------------------
 
-// --- ESTRUCTURA DEL ÁLBUM CORREGIDA ---
+// --- ESTRUCTURA DEL ÁLBUM CON CÓDIGOS DE PAÍS ---
 const albumData = [
-    { "name": "Especiales", "teams": [{ "name": "Logo Panini", "stickers": 1 }, { "name": "Emblemas y Campeones", "stickers": 19 }, { "name": "Coca Cola", "stickers": 14 }] },
-    { "name": "Grupo A", "teams": [{ "name": "México", "stickers": 20 }, { "name": "Sudáfrica", "stickers": 20 }, { "name": "Corea del Sur", "stickers": 20 }, { "name": "República Checa", "stickers": 20 }] },
-    { "name": "Grupo B", "teams": [{ "name": "Canadá", "stickers": 20 }, { "name": "Suiza", "stickers": 20 }, { "name": "Catar", "stickers": 20 }, { "name": "Bosnia y Herzegovina", "stickers": 20 }] },
-    { "name": "Grupo C", "teams": [{ "name": "Brasil", "stickers": 20 }, { "name": "Marruecos", "stickers": 20 }, { "name": "Haití", "stickers": 20 }, { "name": "Escocia", "stickers": 20 }] },
-    { "name": "Grupo D", "teams": [{ "name": "Estados Unidos", "stickers": 20 }, { "name": "Paraguay", "stickers": 20 }, { "name": "Australia", "stickers": 20 }, { "name": "Turquía", "stickers": 20 }] },
-    { "name": "Grupo E", "teams": [{ "name": "Alemania", "stickers": 20 }, { "name": "Curazao", "stickers": 20 }, { "name": "Costa de Marfil", "stickers": 20 }, { "name": "Ecuador", "stickers": 20 }] },
-    { "name": "Grupo F", "teams": [{ "name": "Países Bajos", "stickers": 20 }, { "name": "Japón", "stickers": 20 }, { "name": "Túnez", "stickers": 20 }, { "name": "Suecia", "stickers": 20 }] },
-    { "name": "Grupo G", "teams": [{ "name": "Bélgica", "stickers": 20 }, { "name": "Egipto", "stickers": 20 }, { "name": "Irán", "stickers": 20 }, { "name": "Nueva Zelanda", "stickers": 20 }] },
-    { "name": "Grupo H", "teams": [{ "name": "España", "stickers": 20 }, { "name": "Cabo Verde", "stickers": 20 }, { "name": "Arabia Saudita", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }] },
-    { "name": "Grupo I", "teams": [{ "name": "Francia", "stickers": 20 }, { "name": "Senegal", "stickers": 20 }, { "name": "Noruega", "stickers": 20 }, { "name": "Irak", "stickers": 20 }] },
-    { "name": "Grupo J", "teams": [{ "name": "Argentina", "stickers": 20 }, { "name": "Argelia", "stickers": 20 }, { "name": "Austria", "stickers": 20 }, { "name": "Jordania", "stickers": 20 }] },
-    { "name": "Grupo K", "teams": [{ "name": "Portugal", "stickers": 20 }, { "name": "Uzbekistán", "stickers": 20 }, { "name": "Colombia", "stickers": 20 }, { "name": "R.D. Congo", "stickers": 20 }] },
-    { "name": "Grupo L", "teams": [{ "name": "Inglaterra", "stickers": 20 }, { "name": "Croacia", "stickers": 20 }, { "name": "Ghana", "stickers": 20 }, { "name": "Panamá", "stickers": 20 }] }
+    { 
+        "name": "Especiales", 
+        "codes": "", 
+        "teams": [
+            { "name": "Logo Panini", "stickers": 1 }, 
+            { "name": "Emblemas y Campeones", "stickers": 19 }, 
+            { "name": "Coca Cola", "stickers": 14 }
+        ] 
+    },
+    { 
+        "name": "Grupo A", 
+        "codes": "MEX, RSA, KOR, CZE", 
+        "teams": [
+            { "name": "México", "stickers": 20 }, { "name": "Sudáfrica", "stickers": 20 }, 
+            { "name": "Corea del Sur", "stickers": 20 }, { "name": "República Checa", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo B", 
+        "codes": "CAN, BIH, QAT, SUI", 
+        "teams": [
+            { "name": "Canadá", "stickers": 20 }, { "name": "Bosnia y Herzegovina", "stickers": 20 }, 
+            { "name": "Catar", "stickers": 20 }, { "name": "Suiza", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo C", 
+        "codes": "BRA, MAR, HAI, SCO", 
+        "teams": [
+            { "name": "Brasil", "stickers": 20 }, { "name": "Marruecos", "stickers": 20 }, 
+            { "name": "Haití", "stickers": 20 }, { "name": "Escocia", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo D", 
+        "codes": "USA, PAR, AUS, TUR", 
+        "teams": [
+            { "name": "Estados Unidos", "stickers": 20 }, { "name": "Paraguay", "stickers": 20 }, 
+            { "name": "Australia", "stickers": 20 }, { "name": "Turquía", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo E", 
+        "codes": "GER, CUW, CIV, ECU", 
+        "teams": [
+            { "name": "Alemania", "stickers": 20 }, { "name": "Curazao", "stickers": 20 }, 
+            { "name": "Costa de Marfil", "stickers": 20 }, { "name": "Ecuador", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo F", 
+        "codes": "NED, JPN, SWE, TUN", 
+        "teams": [
+            { "name": "Países Bajos", "stickers": 20 }, { "name": "Japón", "stickers": 20 }, 
+            { "name": "Suecia", "stickers": 20 }, { "name": "Túnez", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo G", 
+        "codes": "BEL, EGY, IRN, NZL", 
+        "teams": [
+            { "name": "Bélgica", "stickers": 20 }, { "name": "Egipto", "stickers": 20 }, 
+            { "name": "Irán", "stickers": 20 }, { "name": "Nueva Zelanda", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo H", 
+        "codes": "ESP, CPV, KSA, URU", 
+        "teams": [
+            { "name": "España", "stickers": 20 }, { "name": "Cabo Verde", "stickers": 20 }, 
+            { "name": "Arabia Saudí", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo I", 
+        "codes": "FRA, SEN, IRQ, NOR", 
+        "teams": [
+            { "name": "Francia", "stickers": 20 }, { "name": "Senegal", "stickers": 20 }, 
+            { "name": "Irak", "stickers": 20 }, { "name": "Noruega", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo J", 
+        "codes": "ARG, ALG, AUT, JOR", 
+        "teams": [
+            { "name": "Argentina", "stickers": 20 }, { "name": "Argelia", "stickers": 20 }, 
+            { "name": "Austria", "stickers": 20 }, { "name": "Jordania", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo K", 
+        "codes": "POR, COD, UZB, COL", 
+        "teams": [
+            { "name": "Portugal", "stickers": 20 }, { "name": "R.D. Congo", "stickers": 20 }, 
+            { "name": "Uzbekistán", "stickers": 20 }, { "name": "Colombia", "stickers": 20 }
+        ] 
+    },
+    { 
+        "name": "Grupo L", 
+        "codes": "ENG, CRO, GHA, PAN", 
+        "teams": [
+            { "name": "Inglaterra", "stickers": 20 }, { "name": "Croacia", "stickers": 20 }, 
+            { "name": "Ghana", "stickers": 20 }, { "name": "Panamá", "stickers": 20 }
+        ] 
+    }
 ];
 
 let mode = 'pegadas';
@@ -50,10 +139,14 @@ function init() {
         const card = document.createElement('div');
         card.className = 'group-card';
 
-        // Estructura actualizada con el contenedor del contador de repetidas (gstat)
+        // Lógica actualizada: envolvemos los códigos en <small> para darles jerarquía
+        const headerTitle = group.codes 
+            ? `${group.name} <small>(${group.codes})</small>` 
+            : group.name;
+
         card.innerHTML = `
             <div class="group-header" id="ghead-${gIndex}">
-                <span>${group.name}</span>
+                <span>${headerTitle}</span>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span class="group-stats" id="gstat-${gIndex}"></span>
                     <span class="chevron"></span>
@@ -68,18 +161,14 @@ function init() {
         const groupWrapper = card.querySelector(`#gwrap-${gIndex}`);
         const groupContent = card.querySelector(`#gcontent-${gIndex}`);
 
-        // --- LÓGICA DE CIERRE EN CASCADA ---
         groupHeader.onclick = () => {
             const isClosing = groupHeader.classList.contains('open');
-
             groupWrapper.classList.toggle('active');
             groupHeader.classList.toggle('open');
 
-            // Si estamos cerrando el grupo, cerramos todos los países internos
             if (isClosing) {
                 const openTeamHeaders = groupContent.querySelectorAll('.team-header.open');
                 const activeTeamWrappers = groupContent.querySelectorAll('.accordion-wrapper.active');
-
                 openTeamHeaders.forEach(th => th.classList.remove('open'));
                 activeTeamWrappers.forEach(tw => tw.classList.remove('active'));
             }
@@ -147,16 +236,13 @@ function toggleSticker(id, el, gName, tName, tTotal) {
 
 function refreshUI() {
     albumData.forEach((g, gIndex) => {
-        let groupRepetidasCount = 0; // Inicia el contador del grupo en 0
-
+        let groupRepetidasCount = 0;
         g.teams.forEach((t, tIndex) => {
             const safeId = `g${gIndex}-t${tIndex}`;
             const prefix = `${g.name}|${t.name}|`;
             const statEl = document.getElementById(`stat-${safeId}`);
-
-            // Siempre calculamos las repetidas para sumarlas al contador del grupo
             const repCount = repetidas.filter(id => id.startsWith(prefix)).length;
-            groupRepetidasCount += repCount; 
+            groupRepetidasCount += repCount;
 
             if (mode === 'pegadas') {
                 const count = pegadas.filter(id => id.startsWith(prefix)).length;
@@ -168,13 +254,12 @@ function refreshUI() {
             }
         });
 
-        // Actualizamos el contador del globo en la cabecera del grupo
         const gStatEl = document.getElementById(`gstat-${gIndex}`);
         if (mode === 'repetidas' && groupRepetidasCount > 0) {
             gStatEl.innerText = groupRepetidasCount;
-            gStatEl.style.display = 'inline-block'; // Se muestra solo si estamos en Repetidas y hay > 0
+            gStatEl.style.display = 'inline-block';
         } else {
-            gStatEl.style.display = 'none'; // Se oculta en modo Pegadas o si es 0
+            gStatEl.style.display = 'none';
         }
     });
 
@@ -201,57 +286,38 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 init();
 
-// --- FUNCIONALIDAD: COPIAR REPETIDAS AL PORTAPAPELES ---
 document.getElementById('btn-export-repetidas').addEventListener('click', async (e) => {
     if (repetidas.length === 0) {
         alert("Aún no tienes figuritas repetidas marcadas.");
         return;
     }
-
-    // 1. Agrupar las figuritas por país
     const repetidasPorPais = {};
-
     repetidas.forEach(id => {
         const partes = id.split('|');
         if (partes.length === 3) {
             const pais = partes[1];
             const numero = parseInt(partes[2]);
-
-            if (!repetidasPorPais[pais]) {
-                repetidasPorPais[pais] = [];
-            }
+            if (!repetidasPorPais[pais]) repetidasPorPais[pais] = [];
             repetidasPorPais[pais].push(numero);
         }
     });
-
-    // 2. Construir el texto ordenado
-    let textoExportacion = "Repetidas:\n";
-    textoExportacion += "================================\n\n";
-
+    let textoExportacion = "Repetidas:\n======================\n\n";
     const paisesOrdenados = Object.keys(repetidasPorPais).sort();
-
     paisesOrdenados.forEach(pais => {
         const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);
         textoExportacion += `${pais}: ${numerosOrdenados.join(' - ')}\n`;
     });
-
-    // 3. Copiar al portapapeles con feedback visual
     try {
         await navigator.clipboard.writeText(textoExportacion);
-
         const btn = e.currentTarget;
         const originalHTML = btn.innerHTML;
-
         btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
         btn.style.backgroundColor = 'var(--panini-green)';
-
         setTimeout(() => {
             btn.innerHTML = originalHTML;
             btn.style.backgroundColor = '';
         }, 2000);
-
     } catch (err) {
-        console.error('Error al copiar: ', err);
-        alert("Hubo un error al intentar copiar. Es posible que tu navegador no tenga los permisos necesarios.");
+        alert("Hubo un error al intentar copiar.");
     }
 });

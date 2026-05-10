@@ -511,12 +511,31 @@ input:checked+.slider:before {
   padding: 2px 8px;
   border-radius: 12px;
   font-weight: 900;
-  display: none; /* Se maneja dinámicamente desde JS */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: none;
+  /* Se maneja dinámicamente desde JS */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .group-stats {
   background-color: #1e2842;
+}
+
+/* --- ESTILO DE LOS CÓDIGOS DE PAÍS EN EL GRUPO --- */
+.group-header small {
+  font-size: 0.75rem;
+  /* Más pequeño que el título */
+  font-weight: 600;
+  /* Letra más fina, no tan negrita */
+  opacity: 0.9;
+  /* Ligeramente transparente para no competir con el título */
+  margin-left: 8px;
+  /* Espacio respecto al nombre del grupo */
+  text-transform: none;
+  /* Evita que se fuerce a mayúsculas si el padre lo tiene */
+  letter-spacing: 0px;
+  /* Letras más juntas para lectura descriptiva */
+  font-family: sans-serif;
+  /* Fuente limpia */
 }
 
 /* --- RESPONSIVE / MOBILE --- */
