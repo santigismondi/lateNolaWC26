@@ -553,6 +553,6 @@ input:checked+.slider:before {
   }
 
   .titulo-grupo {
-    width: 50%; 
+    width: 80%; 
   }
 }
