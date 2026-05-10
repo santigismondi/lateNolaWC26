@@ -538,6 +538,13 @@ input:checked+.slider:before {
   /* Fuente limpia */
 }
 
+.titulo-grupo {
+  display: flex; 
+  width: 50%; 
+  justify-content: space-between;
+  align-items: center; 
+  gap: 10px;
+}
 /* --- RESPONSIVE / MOBILE --- */
 /* Si la pantalla tiene 600px de ancho o menos (celulares), se oculta el logo */
 @media (max-width: 600px) {

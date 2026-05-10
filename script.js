@@ -146,7 +146,7 @@ function init() {
 
         card.innerHTML = `
             <div class="group-header" id="ghead-${gIndex}">
-                <span>${headerTitle}</span>
+                <span class="titulo-grupo">${headerTitle}</span>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span class="group-stats" id="gstat-${gIndex}"></span>
                     <span class="chevron"></span>
