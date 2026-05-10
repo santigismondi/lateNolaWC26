@@ -349,7 +349,68 @@ function renderStats() {
             </h2>
             ${repHtml}
         </div>
+        
+        <div class="group-card stats-box">
+            <h2 class="stats-title"><i class="fa-solid fa-cloud-arrow-up"></i> Gestión de Datos</h2>
+            <p style="font-size: 0.9rem; color: var(--stats-muted); margin: 0;">Genera un código para guardar tu progreso o muévelo a otro dispositivo.</p>
+            <div class="btn-container">
+                <button id="btn-export-full" class="btn-primary"><i class="fa-solid fa-file-export"></i> Exportar</button>
+                <button id="btn-import-full" class="btn-secondary"><i class="fa-solid fa-file-import"></i> Importar</button>
+            </div>
+        </div>
+
+
     `;
+
+    // --- LÓGICA DE LOS NUEVOS BOTONES DE IMPORTAR/EXPORTAR ---
+    
+    // EXPORTAR: Convierte a texto codificado y copia al portapapeles
+    document.getElementById('btn-export-full').addEventListener('click', async (e) => {
+        const data = { pegadas, repetidas };
+        const codigo = btoa(JSON.stringify(data)); // btoa codifica a Base64
+        
+        try {
+            await navigator.clipboard.writeText(codigo);
+            const btn = e.currentTarget;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Código Copiado!';
+            btn.style.backgroundColor = 'var(--panini-green)';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.backgroundColor = '';
+            }, 2000);
+        } catch (err) {
+            alert("No se pudo copiar el código. Intenta nuevamente.");
+        }
+    });
+
+    // IMPORTAR: Pide el código codificado y restaura la app
+    document.getElementById('btn-import-full').addEventListener('click', () => {
+        const codigo = prompt("Pega aquí tu código de progreso generado previamente:");
+        if (codigo) {
+            try {
+                // atob decodifica desde Base64
+                const parsed = JSON.parse(atob(codigo)); 
+                
+                // Verificamos que sea un código válido de nuestra app
+                if (Array.isArray(parsed.pegadas) && Array.isArray(parsed.repetidas)) {
+                    pegadas = parsed.pegadas;
+                    repetidas = parsed.repetidas;
+                    
+                    // Guardamos en este navegador
+                    localStorage.setItem('panini26_pegadas', JSON.stringify(pegadas));
+                    localStorage.setItem('panini26_repetidas', JSON.stringify(repetidas));
+                    
+                    alert("¡Progreso importado con éxito!");
+                    renderStats(); // Recargamos las estadísticas con la nueva data
+                } else {
+                    alert("El código ingresado no es válido.");
+                }
+            } catch (err) {
+                alert("Código inválido o corrupto. Verifica que lo hayas copiado completo.");
+            }
+        }
+    });
 }
 
 // --- LOGICA DE CAMBIO DE PESTAÑAS ---
@@ -372,7 +433,7 @@ document.querySelectorAll('.tab').forEach(tab => {
             document.getElementById('stats-container').classList.add('hidden');
             document.getElementById('footer-pegadas').classList.toggle('hidden', mode !== 'pegadas');
             document.getElementById('footer-repetidas').classList.toggle('hidden', mode !== 'repetidas');
-            refreshUI();
+            refreshUI(); // Refrescamos las visuales de los grupos
         }
     };
 });
