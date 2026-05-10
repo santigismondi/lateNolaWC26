@@ -50,10 +50,14 @@ function init() {
         const card = document.createElement('div');
         card.className = 'group-card';
 
+        // Estructura actualizada con el contenedor del contador de repetidas (gstat)
         card.innerHTML = `
             <div class="group-header" id="ghead-${gIndex}">
                 <span>${group.name}</span>
-                <span class="chevron"></span>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="group-stats" id="gstat-${gIndex}"></span>
+                    <span class="chevron"></span>
+                </div>
             </div>
             <div class="accordion-wrapper" id="gwrap-${gIndex}">
                 <div class="accordion-inner" id="gcontent-${gIndex}"></div>
@@ -142,21 +146,37 @@ function toggleSticker(id, el, gName, tName, tTotal) {
 }
 
 function refreshUI() {
-    albumData.forEach((g, gIndex) => g.teams.forEach((t, tIndex) => {
-        const safeId = `g${gIndex}-t${tIndex}`;
-        const prefix = `${g.name}|${t.name}|`;
-        const statEl = document.getElementById(`stat-${safeId}`);
+    albumData.forEach((g, gIndex) => {
+        let groupRepetidasCount = 0; // Inicia el contador del grupo en 0
 
-        if (mode === 'pegadas') {
-            const count = pegadas.filter(id => id.startsWith(prefix)).length;
-            statEl.innerText = `${count} de ${t.stickers} pegadas`;
-            statEl.style.color = count === t.stickers ? 'var(--primary-color)' : 'var(--stats-muted)';
+        g.teams.forEach((t, tIndex) => {
+            const safeId = `g${gIndex}-t${tIndex}`;
+            const prefix = `${g.name}|${t.name}|`;
+            const statEl = document.getElementById(`stat-${safeId}`);
+
+            // Siempre calculamos las repetidas para sumarlas al contador del grupo
+            const repCount = repetidas.filter(id => id.startsWith(prefix)).length;
+            groupRepetidasCount += repCount; 
+
+            if (mode === 'pegadas') {
+                const count = pegadas.filter(id => id.startsWith(prefix)).length;
+                statEl.innerText = `${count} de ${t.stickers} pegadas`;
+                statEl.style.color = count === t.stickers ? 'var(--primary-color)' : 'var(--stats-muted)';
+            } else {
+                statEl.innerText = repCount > 0 ? `${repCount} repetidas` : '0 repetidas';
+                statEl.style.color = repCount > 0 ? 'var(--secondary-color)' : 'var(--stats-muted)';
+            }
+        });
+
+        // Actualizamos el contador del globo en la cabecera del grupo
+        const gStatEl = document.getElementById(`gstat-${gIndex}`);
+        if (mode === 'repetidas' && groupRepetidasCount > 0) {
+            gStatEl.innerText = groupRepetidasCount;
+            gStatEl.style.display = 'inline-block'; // Se muestra solo si estamos en Repetidas y hay > 0
         } else {
-            const count = repetidas.filter(id => id.startsWith(prefix)).length;
-            statEl.innerText = count > 0 ? `${count} repetidas` : '0 repetidas';
-            statEl.style.color = count > 0 ? 'var(--secondary-color)' : 'var(--stats-muted)';
+            gStatEl.style.display = 'none'; // Se oculta en modo Pegadas o si es 0
         }
-    }));
+    });
 
     const pCount = pegadas.length;
     const perc = ((pCount / totalStickers) * 100).toFixed(1);
@@ -192,7 +212,6 @@ document.getElementById('btn-export-repetidas').addEventListener('click', async 
     const repetidasPorPais = {};
 
     repetidas.forEach(id => {
-        // El id tiene formato "Grupo|País|Número"
         const partes = id.split('|');
         if (partes.length === 3) {
             const pais = partes[1];
@@ -209,11 +228,9 @@ document.getElementById('btn-export-repetidas').addEventListener('click', async 
     let textoExportacion = "Repetidas:\n";
     textoExportacion += "================================\n\n";
 
-    // Obtener los países alfabéticamente
     const paisesOrdenados = Object.keys(repetidasPorPais).sort();
 
     paisesOrdenados.forEach(pais => {
-        // Ordenar los números de menor a mayor
         const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);
         textoExportacion += `${pais}: ${numerosOrdenados.join(' - ')}\n`;
     });
@@ -222,17 +239,15 @@ document.getElementById('btn-export-repetidas').addEventListener('click', async 
     try {
         await navigator.clipboard.writeText(textoExportacion);
 
-        // Cambiamos el botón para dar feedback al usuario
         const btn = e.currentTarget;
         const originalHTML = btn.innerHTML;
 
         btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
-        btn.style.backgroundColor = 'var(--panini-green)'; // Se pone verde
+        btn.style.backgroundColor = 'var(--panini-green)';
 
-        // Volvemos a la normalidad después de 2 segundos
         setTimeout(() => {
             btn.innerHTML = originalHTML;
-            btn.style.backgroundColor = ''; // Vuelve al color definido en CSS
+            btn.style.backgroundColor = '';
         }, 2000);
 
     } catch (err) {

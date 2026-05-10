@@ -503,6 +503,22 @@ input:checked+.slider:before {
   transform: translateY(0);
 }
 
+/* --- CONTADOR DE REPETIDAS POR GRUPO --- */
+.group-stats {
+  font-size: 0.85rem;
+  color: var(--panini-orange);
+  background-color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 900;
+  display: none; /* Se maneja dinámicamente desde JS */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+[data-theme="dark"] .group-stats {
+  background-color: #1e2842;
+}
+
 /* --- RESPONSIVE / MOBILE --- */
 /* Si la pantalla tiene 600px de ancho o menos (celulares), se oculta el logo */
 @media (max-width: 600px) {
