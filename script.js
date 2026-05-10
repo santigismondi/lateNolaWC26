@@ -139,14 +139,15 @@ function init() {
         const card = document.createElement('div');
         card.className = 'group-card';
 
-        // Lógica actualizada: envolvemos los códigos en <small> para darles jerarquía
         const headerTitle = group.codes 
-            ? `${group.name} <small>(${group.codes})</small>` 
-            : group.name;
+            ? `<span class="g-name">${group.name}</span><small class="g-codes">(${group.codes})</small>` 
+            : `<span class="g-name">${group.name}</span>`;
 
         card.innerHTML = `
             <div class="group-header" id="ghead-${gIndex}">
-                <span class="titulo-grupo">${headerTitle}</span>
+                <div class="g-title-box">
+                    ${headerTitle}
+                </div>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span class="group-stats" id="gstat-${gIndex}"></span>
                     <span class="chevron"></span>
@@ -224,7 +225,7 @@ function toggleSticker(id, el, gName, tName, tTotal) {
         if (pegadas.includes(id)) pegadas = pegadas.filter(x => x !== id);
         else pegadas.push(id);
         el.classList.toggle('pegada');
-    } else {
+    } else if (mode === 'repetidas') {
         if (repetidas.includes(id)) repetidas = repetidas.filter(x => x !== id);
         else repetidas.push(id);
         el.classList.toggle('repetida');
@@ -272,20 +273,113 @@ function refreshUI() {
     document.getElementById('text-total-repetidas').innerText = `Total Repetidas: ${repetidas.length}`;
 }
 
+// --- FUNCIÓN PARA RENDERIZAR LAS ESTADÍSTICAS ---
+function renderStats() {
+    const statsContainer = document.getElementById('stats-container');
+    const pCount = pegadas.length;
+    const faltan = totalStickers - pCount;
+    const perc = ((pCount / totalStickers) * 100).toFixed(1);
+
+    // 1. Calcular País con más pegadas
+    const pegadasPorPais = {};
+    pegadas.forEach(id => {
+        const pais = id.split('|')[1];
+        pegadasPorPais[pais] = (pegadasPorPais[pais] || 0) + 1;
+    });
+
+    let maxPegadas = 0;
+    let topPaises = [];
+    for (const pais in pegadasPorPais) {
+        if (pegadasPorPais[pais] > maxPegadas) {
+            maxPegadas = pegadasPorPais[pais];
+            topPaises = [pais];
+        } else if (pegadasPorPais[pais] === maxPegadas) {
+            topPaises.push(pais);
+        }
+    }
+    const topPaisesStr = topPaises.length > 0 ? `${topPaises.join(', ')} (${maxPegadas} pegadas)` : 'Ninguna figurita pegada aún';
+
+    // 2. Calcular lista de repetidas
+    const repetidasPorPais = {};
+    repetidas.forEach(id => {
+        const partes = id.split('|');
+        const pais = partes[1];
+        const num = parseInt(partes[2]);
+        if (!repetidasPorPais[pais]) repetidasPorPais[pais] = [];
+        repetidasPorPais[pais].push(num);
+    });
+
+    let repHtml = '<ul class="stats-list">';
+    const paisesOrdenados = Object.keys(repetidasPorPais).sort();
+    
+    if (paisesOrdenados.length === 0) {
+        repHtml += '<li>No tienes figuritas repetidas.</li>';
+    } else {
+        paisesOrdenados.forEach(pais => {
+            const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);
+            repHtml += `<li><strong>${pais}</strong> <span class="rep-nums">${numerosOrdenados.join(' - ')}</span></li>`;
+        });
+    }
+    repHtml += '</ul>';
+
+    // 3. Inyectar HTML
+    statsContainer.innerHTML = `
+        <div class="group-card stats-box">
+            <h2 class="stats-title"><i class="fa-solid fa-chart-pie"></i> Progreso General</h2>
+            <div style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold;">
+                Completado: ${perc}%
+            </div>
+            <div class="progress-bar-container" style="height: 16px; margin-bottom: 15px; background: #e1e4e8;">
+                <div class="progress-bar" style="width: ${perc}%"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 1.1rem;">
+                <span style="color: var(--panini-green); font-weight: bold;">Pegadas: ${pCount}</span>
+                <span style="color: var(--panini-red); font-weight: bold;">Faltan: ${faltan}</span>
+            </div>
+        </div>
+
+        <div class="group-card stats-box">
+            <h2 class="stats-title"><i class="fa-solid fa-trophy"></i> Más Avanzados</h2>
+            <p class="stats-top-country">${topPaisesStr}</p>
+        </div>
+
+        <div class="group-card stats-box">
+            <h2 class="stats-title" style="color: var(--panini-orange); border-bottom-color: var(--panini-orange);">
+                <i class="fa-solid fa-clone"></i> Lista de Repetidas
+            </h2>
+            ${repHtml}
+        </div>
+    `;
+}
+
+// --- LOGICA DE CAMBIO DE PESTAÑAS ---
 document.querySelectorAll('.tab').forEach(tab => {
     tab.onclick = (e) => {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         mode = tab.dataset.mode;
         document.body.className = `mode-${mode}`;
-        document.getElementById('footer-pegadas').classList.toggle('hidden', mode !== 'pegadas');
-        document.getElementById('footer-repetidas').classList.toggle('hidden', mode !== 'repetidas');
-        refreshUI();
+        
+        // Manejar qué contenedor se muestra
+        if (mode === 'estadisticas') {
+            document.getElementById('app-container').classList.add('hidden');
+            document.getElementById('stats-container').classList.remove('hidden');
+            document.getElementById('footer-pegadas').classList.add('hidden');
+            document.getElementById('footer-repetidas').classList.add('hidden');
+            renderStats(); // Generamos los datos frescos al entrar
+        } else {
+            document.getElementById('app-container').classList.remove('hidden');
+            document.getElementById('stats-container').classList.add('hidden');
+            document.getElementById('footer-pegadas').classList.toggle('hidden', mode !== 'pegadas');
+            document.getElementById('footer-repetidas').classList.toggle('hidden', mode !== 'repetidas');
+            refreshUI();
+        }
     };
 });
 
 init();
 
+// --- FUNCIONALIDAD: COPIAR REPETIDAS AL PORTAPAPELES ---
 document.getElementById('btn-export-repetidas').addEventListener('click', async (e) => {
     if (repetidas.length === 0) {
         alert("Aún no tienes figuritas repetidas marcadas.");
@@ -301,7 +395,7 @@ document.getElementById('btn-export-repetidas').addEventListener('click', async 
             repetidasPorPais[pais].push(numero);
         }
     });
-    let textoExportacion = "Repetidas:\n======================\n\n";
+    let textoExportacion = "Repetidas:\n================================\n\n";
     const paisesOrdenados = Object.keys(repetidasPorPais).sort();
     paisesOrdenados.forEach(pais => {
         const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);

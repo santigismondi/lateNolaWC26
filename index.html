@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panini FIFA WC26 Album</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Agregamos FontAwesome para los iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="./resources/FIFA-2026-World-Cup-Logo-75.png">
 </head>
@@ -14,7 +13,6 @@
 <body class="mode-pegadas">
 
   <header>
-    <!-- Contenedor del Switch con Iconos FontAwesome -->
     <div class="theme-switch-wrapper">
       <i class="fa-solid fa-sun theme-icon" id="icon-light"></i>
       <label class="theme-switch" for="checkbox">
@@ -24,7 +22,6 @@
       <i class="fa-solid fa-moon theme-icon" id="icon-dark"></i>
     </div>
 
-    <!-- Logo (Izquierda) -->
     <div class="header-img">
       <img src="./resources/FIFA-2026-World-Cup-Logo-75.png" alt="Logo Panini FIFA WC26" id="logo-img"
         onerror="this.style.display='none'">
@@ -33,17 +30,20 @@
     <div class="header-top">
       <h1>Panini WC26</h1>
     </div>
+    
     <div class="tabs">
       <div class="tab active" data-mode="pegadas">Pegadas</div>
       <div class="tab" data-mode="repetidas">Repetidas</div>
+      <div class="tab" data-mode="estadisticas">Stats</div>
     </div>
   </header>
 
   <main class="container" id="app-container">
-    <!-- Se inyecta el contenido con script.js -->
-  </main>
+    </main>
 
-  <!-- Footer Pegadas -->
+  <main class="container hidden" id="stats-container">
+    </main>
+
   <footer class="footer-stats" id="footer-pegadas">
     <div class="stats-text">
       <span id="text-pegadas">Pegadas: 0 / 0</span>
@@ -55,11 +55,9 @@
     </div>
   </footer>
 
-  <!-- Footer Repetidas -->
   <footer class="footer-stats hidden" id="footer-repetidas">
     <div class="stats-text" style="align-items: center;">
       <span id="text-total-repetidas" style="color: var(--panini-orange);">Total Repetidas: 0</span>
-      <!-- Botón de Copiar -->
       <button id="btn-export-repetidas" class="export-btn" aria-label="Copiar Repetidas">
         <i class="fa-solid fa-copy"></i> Copiar
       </button>
