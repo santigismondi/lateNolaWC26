@@ -540,7 +540,7 @@ input:checked+.slider:before {
 
 .titulo-grupo {
   display: flex; 
-  width: 50%; 
+  width: 30%; 
   justify-content: space-between;
   align-items: center; 
   gap: 10px;
@@ -550,5 +550,9 @@ input:checked+.slider:before {
 @media (max-width: 600px) {
   .header-img {
     display: none;
+  }
+
+  .titulo-grupo {
+    width: 50%; 
   }
 }
