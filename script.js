@@ -89,7 +89,7 @@ const albumData = [
         "codes": "ESP, CPV, KSA, URU", 
         "teams": [
             { "name": "España", "stickers": 20 }, { "name": "Cabo Verde", "stickers": 20 }, 
-            { "name": "Arabia Saudí", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }
+            { "name": "Arabia Saudita", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }
         ] 
     },
     { 
