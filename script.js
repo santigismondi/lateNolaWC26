@@ -89,7 +89,7 @@ const albumData = [
         "codes": "ESP, CPV, KSA, URU", 
         "teams": [
             { "name": "España", "stickers": 20 }, { "name": "Cabo Verde", "stickers": 20 }, 
-            { "name": "Arabia Saudita", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }
+            { "name": "Arabia Saudí", "stickers": 20 }, { "name": "Uruguay", "stickers": 20 }
         ] 
     },
     { 
@@ -299,26 +299,44 @@ function renderStats() {
     }
     const topPaisesStr = topPaises.length > 0 ? `${topPaises.join(', ')} (${maxPegadas} pegadas)` : 'Ninguna figurita pegada aún';
 
-    // 2. Calcular lista de repetidas
-    const repetidasPorPais = {};
-    repetidas.forEach(id => {
-        const partes = id.split('|');
-        const pais = partes[1];
-        const num = parseInt(partes[2]);
-        if (!repetidasPorPais[pais]) repetidasPorPais[pais] = [];
-        repetidasPorPais[pais].push(num);
+    // 2. Calcular lista de repetidas agrupada por Álbum (Grupos)
+    let repHtml = '<ul class="stats-list">';
+    let tieneAlgunaRepetida = false;
+
+    albumData.forEach(group => {
+        let htmlGrupo = '';
+        let grupoTiene = false;
+
+        group.teams.forEach((team, tIndex) => {
+            const prefix = `${group.name}|${team.name}|`;
+            const reps = repetidas
+                .filter(id => id.startsWith(prefix))
+                .map(id => parseInt(id.split('|')[2]))
+                .sort((a, b) => a - b);
+
+            if (reps.length > 0) {
+                tieneAlgunaRepetida = true;
+                grupoTiene = true;
+                
+                let codeStr = "";
+                if (group.codes) {
+                    const codesArray = group.codes.split(',').map(c => c.trim());
+                    if (codesArray[tIndex]) {
+                        codeStr = ` <small class="rep-nums">(${codesArray[tIndex]})</small>`;
+                    }
+                }
+                htmlGrupo += `<li><strong>${team.name}${codeStr}</strong> <span class="rep-nums">${reps.join(' - ')}</span></li>`;
+            }
+        });
+
+        if (grupoTiene) {
+            repHtml += `<li style="background: var(--bg-color); padding: 5px 10px; font-weight: bold; font-size: 0.85rem; color: var(--panini-blue); border-radius: 4px; margin-top: 10px; border-bottom: none;">${group.name.toUpperCase()}</li>`;
+            repHtml += htmlGrupo;
+        }
     });
 
-    let repHtml = '<ul class="stats-list">';
-    const paisesOrdenados = Object.keys(repetidasPorPais).sort();
-    
-    if (paisesOrdenados.length === 0) {
+    if (!tieneAlgunaRepetida) {
         repHtml += '<li>No tienes figuritas repetidas.</li>';
-    } else {
-        paisesOrdenados.forEach(pais => {
-            const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);
-            repHtml += `<li><strong>${pais}</strong> <span class="rep-nums">${numerosOrdenados.join(' - ')}</span></li>`;
-        });
     }
     repHtml += '</ul>';
 
@@ -344,13 +362,6 @@ function renderStats() {
         </div>
 
         <div class="group-card stats-box">
-            <h2 class="stats-title" style="color: var(--panini-orange); border-bottom-color: var(--panini-orange);">
-                <i class="fa-solid fa-clone"></i> Lista de Repetidas
-            </h2>
-            ${repHtml}
-        </div>
-        
-        <div class="group-card stats-box">
             <h2 class="stats-title"><i class="fa-solid fa-cloud-arrow-up"></i> Gestión de Datos</h2>
             <p style="font-size: 0.9rem; color: var(--stats-muted); margin: 0;">Genera un código para guardar tu progreso o muévelo a otro dispositivo.</p>
             <div class="btn-container">
@@ -359,20 +370,25 @@ function renderStats() {
             </div>
         </div>
 
-
+        <div class="group-card stats-box">
+            <h2 class="stats-title" style="color: var(--panini-orange); border-bottom-color: var(--panini-orange);">
+                <i class="fa-solid fa-clone"></i> Lista de Repetidas
+            </h2>
+            ${repHtml}
+        </div>
     `;
 
-    // --- LÓGICA DE LOS NUEVOS BOTONES DE IMPORTAR/EXPORTAR ---
+    // --- LÓGICA DE LOS BOTONES DE IMPORTAR/EXPORTAR PROGRESO COMPLETO ---
     
-    // EXPORTAR: Convierte a texto codificado y copia al portapapeles
-    document.getElementById('btn-export-full').addEventListener('click', async (e) => {
+    document.getElementById('btn-export-full').addEventListener('click', async () => {
         const data = { pegadas, repetidas };
-        const codigo = btoa(JSON.stringify(data)); // btoa codifica a Base64
+        const codigo = btoa(JSON.stringify(data)); 
         
+        const btn = document.getElementById('btn-export-full'); // Capturamos ANTES del await
+        const originalHTML = btn.innerHTML;
+
         try {
             await navigator.clipboard.writeText(codigo);
-            const btn = e.currentTarget;
-            const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Código Copiado!';
             btn.style.backgroundColor = 'var(--panini-green)';
             setTimeout(() => {
@@ -384,25 +400,21 @@ function renderStats() {
         }
     });
 
-    // IMPORTAR: Pide el código codificado y restaura la app
     document.getElementById('btn-import-full').addEventListener('click', () => {
         const codigo = prompt("Pega aquí tu código de progreso generado previamente:");
         if (codigo) {
             try {
-                // atob decodifica desde Base64
                 const parsed = JSON.parse(atob(codigo)); 
                 
-                // Verificamos que sea un código válido de nuestra app
                 if (Array.isArray(parsed.pegadas) && Array.isArray(parsed.repetidas)) {
                     pegadas = parsed.pegadas;
                     repetidas = parsed.repetidas;
                     
-                    // Guardamos en este navegador
                     localStorage.setItem('panini26_pegadas', JSON.stringify(pegadas));
                     localStorage.setItem('panini26_repetidas', JSON.stringify(repetidas));
                     
                     alert("¡Progreso importado con éxito!");
-                    renderStats(); // Recargamos las estadísticas con la nueva data
+                    renderStats(); 
                 } else {
                     alert("El código ingresado no es válido.");
                 }
@@ -421,58 +433,80 @@ document.querySelectorAll('.tab').forEach(tab => {
         mode = tab.dataset.mode;
         document.body.className = `mode-${mode}`;
         
-        // Manejar qué contenedor se muestra
         if (mode === 'estadisticas') {
             document.getElementById('app-container').classList.add('hidden');
             document.getElementById('stats-container').classList.remove('hidden');
             document.getElementById('footer-pegadas').classList.add('hidden');
             document.getElementById('footer-repetidas').classList.add('hidden');
-            renderStats(); // Generamos los datos frescos al entrar
+            renderStats(); 
         } else {
             document.getElementById('app-container').classList.remove('hidden');
             document.getElementById('stats-container').classList.add('hidden');
             document.getElementById('footer-pegadas').classList.toggle('hidden', mode !== 'pegadas');
             document.getElementById('footer-repetidas').classList.toggle('hidden', mode !== 'repetidas');
-            refreshUI(); // Refrescamos las visuales de los grupos
+            refreshUI(); 
         }
     };
 });
 
 init();
 
-// --- FUNCIONALIDAD: COPIAR REPETIDAS AL PORTAPAPELES ---
-document.getElementById('btn-export-repetidas').addEventListener('click', async (e) => {
+// --- FUNCIONALIDAD: COPIAR REPETIDAS AL PORTAPAPELES (BOTÓN FOOTER) ---
+document.getElementById('btn-export-repetidas').addEventListener('click', async () => {
     if (repetidas.length === 0) {
         alert("Aún no tienes figuritas repetidas marcadas.");
         return;
     }
-    const repetidasPorPais = {};
-    repetidas.forEach(id => {
-        const partes = id.split('|');
-        if (partes.length === 3) {
-            const pais = partes[1];
-            const numero = parseInt(partes[2]);
-            if (!repetidasPorPais[pais]) repetidasPorPais[pais] = [];
-            repetidasPorPais[pais].push(numero);
+
+    let textoExportacion = "REPETIDAS:\n";
+    textoExportacion += "===============\n\n";
+
+    albumData.forEach(group => {
+        let textoGrupo = '';
+        let grupoTiene = false;
+
+        group.teams.forEach((team, tIndex) => {
+            const prefix = `${group.name}|${team.name}|`;
+            const reps = repetidas
+                .filter(id => id.startsWith(prefix))
+                .map(id => parseInt(id.split('|')[2]))
+                .sort((a, b) => a - b);
+
+            if (reps.length > 0) {
+                grupoTiene = true;
+                let codeStr = "";
+                if (group.codes) {
+                    const codesArray = group.codes.split(',').map(c => c.trim());
+                    if (codesArray[tIndex]) {
+                        codeStr = ` (${codesArray[tIndex]})`;
+                    }
+                }
+                textoGrupo += `${team.name}${codeStr}: ${reps.join(' - ')}\n`;
+            }
+        });
+
+        if (grupoTiene) {
+            textoExportacion += `--- ${group.name.toUpperCase()} ---\n`;
+            textoExportacion += textoGrupo + "\n";
         }
     });
-    let textoExportacion = "Repetidas:\n================================\n\n";
-    const paisesOrdenados = Object.keys(repetidasPorPais).sort();
-    paisesOrdenados.forEach(pais => {
-        const numerosOrdenados = repetidasPorPais[pais].sort((a, b) => a - b);
-        textoExportacion += `${pais}: ${numerosOrdenados.join(' - ')}\n`;
-    });
+
+    const btn = document.getElementById('btn-export-repetidas'); // Capturamos ANTES del await
+    const originalHTML = btn.innerHTML;
+
     try {
         await navigator.clipboard.writeText(textoExportacion);
-        const btn = e.currentTarget;
-        const originalHTML = btn.innerHTML;
+        
         btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
         btn.style.backgroundColor = 'var(--panini-green)';
+        
         setTimeout(() => {
             btn.innerHTML = originalHTML;
             btn.style.backgroundColor = '';
         }, 2000);
+
     } catch (err) {
-        alert("Hubo un error al intentar copiar.");
+        console.error('Error al copiar: ', err);
+        alert("Hubo un error al intentar copiar. Es posible que tu navegador no tenga los permisos necesarios.");
     }
 });
